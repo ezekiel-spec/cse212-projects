@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
+
 /// <summary>
-/// A basic implementation of a Queue
+/// A basic implementation of a Queue (First-In-First-Out)
 /// </summary>
 public class PersonQueue
 {
@@ -8,16 +11,23 @@ public class PersonQueue
     public int Length => _queue.Count;
 
     /// <summary>
-    /// Add a person to the queue
+    /// Add a person to the back of the queue
     /// </summary>
-    /// <param name="person">The person to add</param>
     public void Enqueue(Person person)
     {
-        _queue.Insert(0, person);
+        _queue.Add(person);
     }
 
+    /// <summary>
+    /// Remove and return the person from the front of the queue
+    /// </summary>
     public Person Dequeue()
     {
+        if (Length == 0)
+        {
+            throw new InvalidOperationException("Queue is empty.");
+        }
+
         var person = _queue[0];
         _queue.RemoveAt(0);
         return person;
